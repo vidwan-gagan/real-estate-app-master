@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sign-up page</title>
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'signup.css' %}">
+
+</head>
+<body>
+    <div class="content">
+      <h1> Be where the world is looking.</h1>
+      <p>The homes we represent benefit from the worldwide recognition and gain exclusive access to highly qualified global clientele. Our award-winning website — now in 14 languages/dialects attracts more visitors than any other luxury real estate website. Our relationship with leading media outlets increase traffic to our site and generate exposure for our listings.</p>
+    </div>
+
+    <div class="box">
+      <h1>Sign Up</h1>
+      <h4>It's free and only takes a minute</h4>
+
+      {% for message in messages %}
+      <h1 style="color: rgb(255, 255, 255)">{{message}}</h1>
+      {% endfor %}
+
+      <form method="post" action="signup" class="input-box">
+        {% csrf_token %}
+          <label>UserName</label>
+          <input type="text" placeholder="UserName" name="username" required/>
+          <label>Email</label>
+          <input type="email" placeholder="Email" name="email" required/>
+          <label>Password</label>
+          <input type="password" placeholder="Password" name="password" required/>
+          <label>Confirm Password</label>
+          <input type="password" placeholder="Confirm Password" name="confirmpassword" required/>
+        <div class="btn">
+            <input type="submit" value="Submit"/>
+        </div>
+      </form>
+    </div>
+    <p>
+      By clicking the Sign Up button,you agree to our <br />
+      <a href="#">Terms and Condition</a> and <a href="#">Policy Privacy</a><br />
+    </p>
+    <p class="login-box">
+      Already have an account? <a href="login">Login here</a>
+    </p>
+</body>
+</html>

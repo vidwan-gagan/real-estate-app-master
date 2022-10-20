@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>details</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'details.css' %}">
+
+</head>
+<body>
+
+<header>
+    <a href="" class="logo"><span>real</span>Estate</a>
+</header>
+<section class="pro-details" id="pro-details">
+    <div class="box">
+        <div class="image-container">
+            <img src="{{ Feature.image.url }}" alt="">
+            <div class="info">
+                <h3>for sale</h3>
+            </div>
+        </div>
+        <div class="owner">
+            <h2>owner details</h2>
+            <p><span>Name:</span>{{Feature.oname}}<br>
+                <span>Address:</span>{{Feature.oaddress}}<br>
+                <span>Phone:</span>{{Feature.ophone}}<br>
+                <span>Mail:</span>{{Feature.omail}}
+            </p> 
+        </div>
+    </div>
+    
+    {% if messages %}
+    {% for message in messages %}
+    <h1 style="color: rgb(255, 255, 255)">{{message}}</h1>
+    {% endfor %}
+    {% endif %}
+
+
+    <div class="content">
+        <div class="price">
+            <h3>${{Feature.price}} crore</h3>
+        </div>
+        <div class="location">
+            <h3>{{Feature.name}}</h3>
+            <p>{{Feature.address}}</p>
+        </div>
+        <div class="details">
+            <h3> <i class="fas fa-expand"></i> {{Feature.area}} acres </h3>
+            <h3> <i class="fas fa-bed"></i> {{Feature.beds}} beds </h3>
+            <h3> <i class="fas fa-bath"></i> {{Feature.baths}} baths </h3>
+        </div>
+    </div> 
+    <div class="Inquiry">
+        <h3>Start Inquiry on Property now:</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="hidden" {% if user.is_authenticated %} value="{{username}}" {% endif %} name="username" required>
+            <input type="hidden" {% if user.is_authenticated %} value="{{email}}" {% endif %} name="email" required>
+            <input type="hidden" value="{{Feature.omail}}" name="omail" required>
+            <textarea name="message"></textarea>
+            <div class="btn">
+                <input type="submit" value="Send"/>
+            </div>
+        </form>
+    </div>      
+</section>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>buying properties</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+
+</head>
+<body>
+    <header>
+
+        <a href="" class="logo"><span>real</span>Estate</a>
+
+    </header>
+
+    <section class="features" id="features">
+
+        <div class="heading">
+            <p><span>Features</span> of properties</p>
+        </div>
+        <div class="box-container">
+            {% for F in Feature %}
+            <div class="box">
+                <div class="image-container">
+                    <img src='{{ F.image.url }}' alt="">
+                    <div class="info">
+                        <h3>for sale</h3>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="price">
+                        <h3>${{F.price}} crore</h3>
+                    </div>
+                    <div class="location">
+                        <h3>{{F.name}}</h3>
+                        <p>{{F.address}}</p>
+                    </div>
+                    <div class="details">
+                        <h3> <i class="fas fa-expand"></i> {{F.area}} acres </h3>
+                        <h3> <i class="fas fa-bed"></i> {{F.beds}} beds </h3>
+                        <h3> <i class="fas fa-bath"></i> {{F.baths}} baths </h3>
+                    </div>
+                    <div data-product='{{F.id}}' class="buttons">
+                        {% if user.is_authenticated %}
+                        <a href="details/{{F.id}}" class="btn">view details</a>
+                        {% else %}
+                        <a href="signup"><button class="btn">view details</button></a>
+                    {% endif %}   
+                    </div>
+                </div>
+                
+            </div>
+            {% endfor %}
+            
+        </div>
+        
+    </section>
+
+</body>
+</html>

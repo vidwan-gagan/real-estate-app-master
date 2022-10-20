@@ -1,0 +1,270 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real estate website</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header>
+
+    <a href="" class="logo"><span>Real</span>Estate</a>
+
+    <nav class="navbar">
+        <a href="#home">home</a>
+        <a href="#services">services</a>
+        <a href="#features">features</a>
+        <a href="#agents">agents</a>
+        <a href="#contact">contact</a>
+        {% if user.is_authenticated %}
+        <a href="logout"> <button class="btn">logout</button></a>
+        {% else %}
+        <a href="signup"><button class="btn">signup</button></a>
+        {% endif %}
+    </nav>
+
+    <div class="icons">
+        <div id="menu-bars" class="fas fa-bars"></div>
+    </div>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+    <div class="heading">
+        {% if user.is_authenticated %}
+        <p>Welcome, {{user.username}}</p>
+        {% endif %}
+        <p>Exceptional properties deserve extraordinary marketing.</p>
+    </div>
+    <div class="background-image"></div>
+
+</section>
+
+<!-- home section ends -->
+
+<!-- service section starts -->
+
+<section class="services" id="services">
+
+    <div class="heading">
+        <p>Our <span>Services</span></p>
+    </div>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="{% static 'images/s-1.png' %}" alt="">
+            <h3>buying home</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam distinctio ipsa ab cum error quas fuga ad? Perspiciatis, autem officiis?</p>
+            {% if user.is_authenticated %}
+            <a href="buying properties" class="btn">learn more</a>
+            {% else %}
+            <a href="signup"><button class="btn">learn more</button></a>
+            {% endif %}
+        </div>
+
+        <div class="box">
+            <img src="{% static 'images/s-3.png' %}" alt="">
+            <h3>selling home</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam distinctio ipsa ab cum error quas fuga ad? Perspiciatis, autem officiis?</p>
+            {% if user.is_authenticated %}
+            <a href="selling properties" class="btn">learn more</a>
+            {% else %}
+            <a href="signup"><button class="btn">learn more</button></a>
+            {% endif %}
+        </div>
+
+    </div>
+
+</section>
+
+<!-- service section ends -->
+
+
+<!-- featured section starts  -->
+
+<section class="features" id="features">
+
+    <div class="heading">
+        <p><span>Features</span> of properties</p>
+    </div>
+    <div class="box-container">
+        {% for F in Feature %}
+        <div class="box">
+            <div class="image-container">
+                <img src='{{ F.image.url }}' alt="">
+                <div class="info">
+                    <h3>for sale</h3>
+                </div>
+            </div>
+            <div class="content">
+                <div class="price">
+                    <h3>${{F.price}} crore</h3>
+                </div>
+                <div class="location">
+                    <h3>{{F.name}}</h3>
+                    <p>{{F.address}}</p>
+                </div>
+                <div class="details">
+                    <h3> <i class="fas fa-expand"></i> {{F.area}} acres </h3>
+                    <h3> <i class="fas fa-bed"></i> {{F.beds}} beds </h3>
+                    <h3> <i class="fas fa-bath"></i> {{F.baths}} baths </h3>
+                </div>
+                <div data-product='{{F.id}}' class="buttons">
+                    {% if user.is_authenticated %}
+                    <a href="details/{{F.id}}" class="btn">view details</a>
+                    {% else %}
+                    <a href="signup"><button class="btn">view details</button></a>
+                {% endif %}   
+                </div>
+            </div>
+            
+        </div>
+        {% endfor %}
+        
+    </div>
+    
+</section>
+
+<!-- featured section ends -->
+
+<!-- agents section starts  -->
+
+<section class="agents" id="agents">
+
+    <h1 class="heading"> professional <span>agents</span> </h1>
+
+    <div class="box-container">
+        {% for a in Agent %}
+        <div class="box">
+            <h4><i class="fas fa-envelope"></i>{{a.mail_id}}</h4>
+            <h4><i class="fas fa-phone"></i>{{a.phone}}</h4>
+            {% if a.id == 1 %}
+            <img src="{% static 'images/pic-1.png' %}" alt="">
+            {% elif a.id == 2 %}
+            <img src="{% static 'images/pic-2.png' %}" alt="">
+            {% elif a.id == 3 %}
+            <img src="{% static 'images/pic-3.png' %}" alt="">
+            {% elif a.id == 4 %}
+            <img src="{% static 'images/pic-4.png' %}" alt="">
+            {% endif %}            
+            <h3>{{a.name}}</h3>
+            <span>agent</span>
+            <div class="share">
+                <a href="{{a.facebook_id}}" class="fab fa-facebook-f"></a>
+                <a href="{{a.twittwer_id}}" class="fab fa-twitter"></a>
+                <a href="{{a.instagram_id}}" class="fab fa-instagram"></a>
+                <a href="{{a.linkedin}}" class="fab fa-linkedin"></a>
+            </div>
+        </div>
+        {% endfor %}
+        
+    </div>
+
+</section>
+
+<!-- agents section ends -->
+
+<!-- contact section starts  -->
+
+<section class="contact" id="contact">
+
+    <h1 class="heading"> <span>contact</span> us </h1>
+    
+    <div class="icons-container">
+    
+        <div class="icons">
+            <img src="{% static 'images/icon-1.png' %}" alt="">
+            <h3>phone number</h3>
+            <p>+123-456-7890</p>
+            <p>+111-222-3333</p>
+        </div>
+    
+        <div class="icons">
+            <img src="{% static 'images/icon-2.png' %}" alt="">
+            <h3>email address</h3>
+            <p>shaikhanas@gmail.com</p>
+            <p>anasshaikha@gmail.com</p>
+        </div>
+    
+         <div class="icons">
+            <img src="{% static 'images/icon-3.png' %}" alt="">
+            <h3>office address</h3>
+            <p>jogeshwari, mumbai, india - 400104</p>
+        </div>
+    
+    </div>
+
+    <div class="row">
+         
+        <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5955.016168245369!2d79.63969942132181!3d17.51377058354058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a34bbf366ffdc03%3A0xa6daefa7fb89896a!2sHaripriyal%2C%20Telangana%20506163!5e1!3m2!1sen!2sin!4v1655276167392!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+    
+    </div>
+    
+    </section>
+    
+    <!-- contact section ends -->
+    
+    <!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="footer-container">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3>branch location</h3>
+                <a href="https://goo.gl/maps/NhsHxGsVAHJ2GsSs8">india</a>
+                <a href="https://goo.gl/maps/qNXji2d9m671L2tF6">USA</a>
+                <a href="https://goo.gl/maps/E29kWgXD9Pu2caFH6">france</a>
+                <a href="https://goo.gl/maps/kmvyNBuCwssyUq7f8">russia</a>
+                <a href="https://goo.gl/maps/r9ipvtCYEh5E5BdQ7">japan</a>
+            </div> 
+            
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="#home">home</a>
+                <a href="#services">services</a>
+                <a href="#features">features</a>
+                <a href="#agents">agents</a>
+                <a href="#contact">contact</a>
+            </div>  
+
+            <div class="box">
+                <h3>follow us</h3>
+                <a href="https://en.wikipedia.org/wiki/Facebook">facebook</a>
+                <a href="https://en.wikipedia.org/wiki/Twitter">twitter</a>
+                <a href="https://en.wikipedia.org/wiki/Instagram">instagram</a>
+                <a href="https://en.wikipedia.org/wiki/LinkedIn">linkedin</a>
+            </div> 
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- footer section ends -->
+
+<script src="{% static 'script.js' %}"></script>
+
+</body>
+</html>

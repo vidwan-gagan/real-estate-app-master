@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>selling properties</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'properties.css' %}">
+
+</head>
+<body>
+
+    <div class="content">
+        <h1> Be where the world is looking.</h1>
+        <p>The homes we represent benefit from the worldwide recognition and gain exclusive access to highly qualified global clientele. Our award-winning website — now in 14 languages/dialects attracts more visitors than any other luxury real estate website. Our relationship with leading media outlets increase traffic to our site and generate exposure for our listings.</p>
+      </div>
+
+      <h1>Add properties for sale</h1>
+      <h3>properties should be worth of above 1 crore</h3>
+  
+      <div class="box">
+
+          <form method="post" action="selling properties" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            {% if messages %}
+            {% for message in messages %}
+            <h1 style="color: rgb(0, 0, 0)">{{message}}</h1>
+            {% endfor %}
+            {% endif %}
+            <div class="owner">
+              <h4>Owner Details</h4>
+              <label>Name of the  property owner</label>
+              <input type="text" placeholder="Name" name="oname" required/>
+              <label>Address</label>
+              <input type="text" placeholder="Address" name="oaddress" required/>
+              <label>Mail id</label>
+              <input type="text" placeholder="Mail id" name="omail" required/>
+              <label>phone number</label>
+              <input type="text" placeholder="Phone number" name="ophone" required/>
+            </div>
+            <div class="property">
+              <h4>Property Details</h4>
+              <label>Name of the property</label>
+              <input type="text" placeholder="Name" name="name" required/>
+              <label>Property Address</label>
+              <input type="text" placeholder="Address" name="address" required/>
+              <label>Image of the property</label>
+              <input type="file" placeholder="Image" name="image" required/>
+              <label>Price</label>
+              <input type="text" placeholder="price in crore" name="price" required/>
+              <label>Area</label>
+              <input type="text" placeholder="acres" name="area" required/>
+              <label>No.of bedrooms</label>
+              <input type="text" placeholder="beds" name="beds" required/>
+              <label>No.of bathrooms</label>
+              <input type="text" placeholder="baths" name="baths" required/>
+              <div class="btn">
+                <input type="submit" value="Insert"/>
+              </div>
+            </div>
+
+          </form>
+
+      </div>
+
+</body>
+</html>
